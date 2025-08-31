@@ -1,0 +1,6 @@
+setcpm(20)
+$:s("[bd bd - bd sd - - -]*2").bank("[<tr909 tr707>]*4").room("[<.5 1>]*4")
+$:chord("<Dm F Gm Asus>").voicing().room(.5).release(1.8).sound("piano")
+$:note("[D2 F2 G2 A2]/4").room(.5).release(1.8).sound("piano")
+$:note("<[D2*16] [F2*16] [G2*16] [A2*16]>").sound("gm_acoustic_bass").gain("[1 1 1 1.5]").lpf(saw.range(100, 5000))
+$:note("<[D F G A] [D F G G]>").sound("gm_electric_guitar_muted").room(".5").delay(".5")
