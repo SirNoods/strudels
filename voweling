@@ -1,0 +1,12 @@
+// @title Voweling
+// @by Goshva
+
+
+//DRUMS
+$:s("[bd [sd,bd]]*2").bank("tr909").duckorbit(2).duckattack(0.2).duckdepth(.8).room("[.2 .5]*2")
+
+//FAT PAD (BASSY)
+$:note("<g1 bb1 d2 f1>").add(note("0,.1")).s("sawtooth").lpf(2000).scope().orbit(2)
+
+//ARP
+$:n("0 1 2 3 4 3 2 1").chord("[G Bb D F]/4").mode("above:c3").voicing().sound("sawtooth").vowel("[a|e|i|o|u|ae|aa|oe|ue|y|uh|un|en|an]*16").lpf(500).gain(2)
