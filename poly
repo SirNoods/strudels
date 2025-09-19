@@ -1,0 +1,6 @@
+// @title Poly
+// @by Goshva
+
+$:note("C5*4,B4*3.95,A4*3.9,G5*3.85,F4*3.8,E4*3.75,D4*3.7").piano()._punchcard().sound("gm_glockenspiel")
+
+$:s("bd*4").bank("tr909")
