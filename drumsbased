@@ -1,0 +1,41 @@
+// "drumsbased" @by goshva
+// @version 1.0
+
+//samples
+samples('github:bubobubobubobubo/dough-waveforms')
+//speed
+setcps(.75)
+
+// vars and sliders
+let prog = "<C!4 E!4 G!4 Bsus!4>"
+let spread = slider(0.088, 0, 0.2, 0.001)
+let timeSpread  = slider(0.032, 0, .04, 0.001)
+let arpVol = slider(1, 0, 1, 0.01)
+let drumVol = slider(2.5, 0, 2.5, 0.1)
+let breakVol = slider(2, 0, 2, 0.1)
+let room = slider(0.6, 0, .6, 0.01)
+let bassVol = slider(3, 0, 3, .01)
+
+  
+_arp$:n("0 1 2 3 4 3 2 1").chord(prog).mode("above:b3").voicing().s("saw").attack(0).decay(.08).sustain(.5).release(.05)
+  .layer(
+    x=>x.gain(.4),
+    x=>x.add(note(spread.mul(-1))).gain(.15).late(timeSpread),
+    x=>x.add(note(spread.mul(-1.01))).gain(.15).late(timeSpread),
+    x=>x.add(note(spread.mul(1.01))).gain(.15).late(timeSpread),
+    x=>x.add(note(spread)).gain(.15).late(timeSpread)).gain(arpVol).room(room)
+
+break$:s("breaks165").chop(8).gain(breakVol).room(room)._scope()
+
+drum$:stack(
+  s("bd - sd - - bd sd -").bank("tr909"),
+  s("bd - - - - bd - -").bank("tr808").duck(2).duckdepth(1).duckattack(.1)).gain(drumVol)._scope()
+otherbass$:n("1*4").chord(prog).mode("above:b1").voicing().s("wt_dbass").orbit(2).n(run(4)).lpf(perlin.range(100,1000).slow(8)).lpenv(-3).lpa(.1).room(.5).fast(2).gain(bassVol).gain(20)._scope()
+
+_bassdrone$:n("1 1 1 1 1 1 1 1").chord(prog).mode("above:e1").voicing().s("saw").layer(
+    x=>x.gain(.4),
+    x=>x.add(note(spread.mul(-1))).gain(.15).late(timeSpread),
+    x=>x.add(note(spread.mul(-1.01))).gain(.15).late(timeSpread),
+    x=>x.add(note(spread.mul(1.01))).gain(.15).late(timeSpread),
+    x=>x.add(note(spread)).gain(.15))
+    .gain(bassVol).orbit(2).lpf(perlin.range(100,1000)).lpenv(6).lpa(0).lpd(.1).lps(0)._scope()
