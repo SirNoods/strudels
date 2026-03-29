@@ -1,0 +1,29 @@
+//cyberpunk experiment
+setcps(0.8)
+
+drum$:stack(
+  s("bd -").gain(1.2).dist(2).bank("akailinn"),
+  s("- sd").gain(1.2).dist(1.2).room(.2).bank("akailinn"),
+  s("hh*<4!7 8!1>").gain(0.3)
+)
+
+bass$:n("0 1 0 3 0 -1 4 3").scale("F1:phrygian").speed("[1 | 1.11 | .99 | 2]*8")
+  .s("wt_vgame, saw, sine")
+  .lpf(sine.range(200, 1200).slow(4))
+  .distort(.9)
+  .gain(0.9)
+.decay(.2)
+
+
+_chord$:chord("[Fm Fm - Db - - - - Ebm Ebm Csus - Csus - - -]/8").voicing().room(.5).sound("bytebeat").struct("1 [~ 1] [1 ~] 1")
+.hpf(200)
+.lpf(4000)
+.distort(.2)
+.decay(.1)
+
+arp$:chord("[Fm Fm - Db - - - - Ebm Ebm Csus - Csus - - -]/8").voicing().room(.5).sound("saw")
+  .attack(.001)
+  .decay(.5)
+  .sustain(.4)
+  .release(.1)
+  .arp("[0 [0,2] 1 [0,2]]").spiral()
